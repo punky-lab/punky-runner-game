@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectSwipeOnlyAfterRelease: 1
-  minDistanceForSwipe: 50
+  minDistanceForSwipe: 80
 --- !u!4 &542683235
 Transform:
   m_ObjectHideFlags: 0
