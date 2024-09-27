@@ -38,11 +38,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 817703143
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 817703143
+  - name: Ostacles
+    uniqueID: 3502144477
     locked: 0
   - name: Player
     uniqueID: 2769968661
