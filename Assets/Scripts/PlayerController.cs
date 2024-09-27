@@ -9,16 +9,16 @@ public class PlayerController : MonoBehaviour
 
     // left: -1
     // right: 1
-    public int Direction { get; private set; }
+    private int _direction;
 
     private void Start()
     {
-        Direction = 0;
+        _direction = 0;
     }
 
     private void Update()
     {
-        var direction = new Vector3(Direction, 0, 0);
+        var direction = new Vector3(_direction, 0, 0);
         direction.Normalize();
         direction *= speed * Time.deltaTime;
         transform.Translate(direction);
@@ -38,13 +38,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSwipeLeft()
     {
-        print("Swiped Left!");
-        Direction = -1;
+        // print("Swiped Left!");
+        _direction = -1;
     }
 
     private void HandleSwipeRight()
     {
-        print("Swiped Right!");
-        Direction = 1;
+        // print("Swiped Right!");
+        _direction = 1;
     }
 }

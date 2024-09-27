@@ -8,16 +8,19 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject[] obstacles;
 
     // Spawn interval in seconds
-    public float spawnInterval = 0.5f;
+    public float spawnInterval = 0.8f;
 
     // Reference the main camera
     private Camera _mainCamera;
+
+    private float _initialGameSpeed;
 
     private void Start()
     {
         _mainCamera = Camera.main;
         // Start the spawning coroutine
         StartCoroutine(SpawnObstacleRoutine());
+        _initialGameSpeed = GameLevel.GameSpeed;
     }
 
     private IEnumerator SpawnObstacleRoutine()
@@ -25,7 +28,7 @@ public class ObstacleSpawner : MonoBehaviour
         while (true)
         {
             // Wait for the specified spawn interval
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(spawnInterval / GameLevel.GameSpeedRate);
 
             // Randomly select an obstacle prefab
             var index = Random.Range(0, obstacles.Length);
