@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
     // left: -1
     // right: 1
     private int _direction;
+    
+    private Animator _animator;
 
     private void Start()
     {
         _direction = 0;
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -40,11 +43,13 @@ public class PlayerController : MonoBehaviour
     {
         // print("Swiped Left!");
         _direction = -1;
+        _animator.SetInteger("Direction", -1);
     }
 
     private void HandleSwipeRight()
     {
         // print("Swiped Right!");
         _direction = 1;
+        _animator.SetInteger("Direction", 1);
     }
 }
