@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 5.5f;
+    public float moveBoundary = 1.6f;
 
     // left: -1
     // right: 1
@@ -21,9 +22,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameLevel.GamePaused) return;
         var direction = new Vector3(_direction, 0, 0);
         direction.Normalize();
         direction *= speed * Time.deltaTime;
+        var position = transform.position + direction;
+        if (Mathf.Abs(position.x) > moveBoundary) return;
         transform.Translate(direction);
     }
 
@@ -37,6 +41,17 @@ public class PlayerController : MonoBehaviour
     {
         SwipeDetector.OnSwipeLeft -= HandleSwipeLeft;
         SwipeDetector.OnSwipeRight -= HandleSwipeRight;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HandleGameOver();
+    }
+
+    private void HandleGameOver()
+    {
+        print("end game");
+        GameLevel.GameOver();
     }
 
     private void HandleSwipeLeft()
