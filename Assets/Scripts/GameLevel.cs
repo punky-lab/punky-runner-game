@@ -14,13 +14,13 @@ public class GameLevel : MonoBehaviour
 
     public static float GameSpeed = 3.0f;
 
-    private static float _initialGameSpeed;
+    private static float _initialGameSpeed = GameSpeed;
     public static float GameSpeedRate => GameSpeed / _initialGameSpeed;
     public static bool GamePaused { get; private set; }
 
     private void Start()
     {
-        _initialGameSpeed = GameSpeed;
+        GameSpeed = _initialGameSpeed;
         gameOverText.SetActive(false);
         Instance = this;
         GamePaused = false;

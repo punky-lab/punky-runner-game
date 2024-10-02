@@ -10,6 +10,10 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+/WebGL Builds
+/connectwebgl.zip
+/webgl_sharing
+
 # Jetbrains
 .idea/
 
