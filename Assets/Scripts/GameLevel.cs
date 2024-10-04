@@ -10,19 +10,19 @@ public class GameLevel : MonoBehaviour
 
     public GameObject gameOverText;
 
-    public static GameLevel Instance;
+    private static GameLevel _instance;
 
     public static float GameSpeed = 3.0f;
 
-    private static float _initialGameSpeed = GameSpeed;
-    public static float GameSpeedRate => GameSpeed / _initialGameSpeed;
+    private static readonly float InitialGameSpeed = GameSpeed;
+    public static float GameSpeedRate => GameSpeed / InitialGameSpeed;
     public static bool GamePaused { get; private set; }
 
     private void Start()
     {
-        GameSpeed = _initialGameSpeed;
+        GameSpeed = InitialGameSpeed;
         gameOverText.SetActive(false);
-        Instance = this;
+        _instance = this;
         GamePaused = false;
     }
 
@@ -36,6 +36,6 @@ public class GameLevel : MonoBehaviour
     {
         GameSpeed = 0;
         GamePaused = true;
-        Instance.gameOverText.SetActive(true);
+        _instance.gameOverText.SetActive(true);
     }
 }
