@@ -8,7 +8,8 @@ public class GameLevel : MonoBehaviour
     // Game speed increase per second
     public float gameSpeedIncrease = 0.3f;
 
-    public GameObject gameOverText;
+    public GameObject gameOverUI;
+    public GameObject gameStartUI;
 
     private static GameLevel _instance;
 
@@ -20,10 +21,11 @@ public class GameLevel : MonoBehaviour
 
     private void Start()
     {
-        GameSpeed = InitialGameSpeed;
-        gameOverText.SetActive(false);
+        GameSpeed = 0;
+        gameOverUI.SetActive(false);
+        gameStartUI.SetActive(true);
         _instance = this;
-        GamePaused = false;
+        GamePaused = true;
     }
 
     private void Update()
@@ -36,6 +38,13 @@ public class GameLevel : MonoBehaviour
     {
         GameSpeed = 0;
         GamePaused = true;
-        _instance.gameOverText.SetActive(true);
+        _instance.gameOverUI.SetActive(true);
+    }
+
+    public static void GameStart()
+    {
+        GameSpeed = InitialGameSpeed;
+        GamePaused = false;
+        _instance.gameStartUI.SetActive(false);
     }
 }

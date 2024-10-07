@@ -24,10 +24,12 @@ public class ObstacleSpawner : MonoBehaviour
 
     private IEnumerator SpawnObstacleRoutine()
     {
+        // print("spawning obstacles");
         while (true)
         {
+            if (GameLevel.GamePaused) yield return new WaitForSeconds(1);
             // Wait for the specified spawn interval
-            yield return new WaitForSeconds(spawnInterval / GameLevel.GameSpeedRate);
+            else yield return new WaitForSeconds(spawnInterval / GameLevel.GameSpeedRate);
 
             // Randomly select an obstacle prefab
             var index = Random.Range(0, obstacles.Length);
