@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameLevel : MonoBehaviour
 {
+    public static UnityAction OnGameStart;
+    public static UnityAction OnGameOver;
+
     // Game speed increase per second
     public float gameSpeedIncrease = 0.3f;
 
@@ -39,6 +43,7 @@ public class GameLevel : MonoBehaviour
         GameSpeed = 0;
         GamePaused = true;
         _instance.gameOverUI.SetActive(true);
+        OnGameOver?.Invoke();
     }
 
     public static void GameStart()
@@ -46,5 +51,6 @@ public class GameLevel : MonoBehaviour
         GameSpeed = InitialGameSpeed;
         GamePaused = false;
         _instance.gameStartUI.SetActive(false);
+        OnGameStart?.Invoke();
     }
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstacleSpawner : MonoBehaviour
 {
@@ -18,7 +20,20 @@ public class ObstacleSpawner : MonoBehaviour
     private void Start()
     {
         _mainCamera = Camera.main;
-        // Start the spawning coroutine
+    }
+
+    private void OnEnable()
+    {
+        GameLevel.OnGameStart += StartSpawn;
+    }
+
+    private void OnDisable()
+    {
+        GameLevel.OnGameStart -= StartSpawn;
+    }
+
+    private void StartSpawn()
+    {
         StartCoroutine(SpawnObstacleRoutine());
     }
 
