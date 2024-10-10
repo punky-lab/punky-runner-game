@@ -6,8 +6,14 @@ using Random = UnityEngine.Random;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    // Array of obstacle prefabs to spawn
+    // Array of prefabs to spawn
     public GameObject[] obstacles;
+    public GameObject[] rewards;
+    
+    private uint _spawnCounter = 0;
+    private int _rewardInterval;
+    public int rewardIntervalFrom = 3;
+    public int rewardIntervalTo = 6;
 
     // Spawn interval in seconds
     public float spawnInterval = 1.5f;
@@ -20,6 +26,7 @@ public class ObstacleSpawner : MonoBehaviour
     private void Start()
     {
         _mainCamera = Camera.main;
+        _rewardInterval = Random.Range(rewardIntervalFrom, rewardIntervalTo);
     }
 
     private void OnEnable()
@@ -46,8 +53,7 @@ public class ObstacleSpawner : MonoBehaviour
             // Wait for the specified spawn interval
             else yield return new WaitForSeconds(spawnInterval / GameLevel.GameSpeedRate);
 
-            // Randomly select an obstacle prefab
-            var index = Random.Range(0, obstacles.Length);
+            
 
             // Randomly select a position within the screen width at the bottom
             var xPosition = Random.Range(_mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x + spawnNarrowX,
@@ -55,8 +61,19 @@ public class ObstacleSpawner : MonoBehaviour
             var spawnPosition = new Vector3(xPosition,
                 _mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).y - 1, 0);
 
-            // Instantiate the selected obstacle at the spawn position
-            Instantiate(obstacles[index], spawnPosition, Quaternion.identity);
+            if (_spawnCounter >= _rewardInterval)
+            {
+                _spawnCounter = 0;
+                _rewardInterval = Random.Range(rewardIntervalFrom, rewardIntervalTo);
+                var index = Random.Range(0, rewards.Length);
+                Instantiate(rewards[index], spawnPosition, Quaternion.identity);
+            }
+            else
+            {
+                _spawnCounter++;
+                var index = Random.Range(0, obstacles.Length);
+                Instantiate(obstacles[index], spawnPosition, Quaternion.identity);
+            }
         }
     }
 }

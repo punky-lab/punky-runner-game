@@ -22,7 +22,7 @@ public class ObstacleController : MonoBehaviour
         transform.Translate(_moveSpeed * Time.deltaTime * Vector2.up);
 
         // Check if the obstacle has moved out of the screen
-        if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize)
+        if (transform.position.y > _mainCamera.transform.position.y + _mainCamera.orthographicSize + 0.5)
         {
             // Destroy the obstacle once it's out of the screen
             Destroy(gameObject);

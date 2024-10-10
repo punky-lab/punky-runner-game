@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     // left: -1
     // right: 1
     private int _direction;
-    
+
     private Animator _animator;
 
     private void Start()
@@ -45,7 +45,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        HandleGameOver();
+        if (collision.CompareTag("Obstacle"))
+        {
+            HandleGameOver();
+            return;
+        }
+
+        if (collision.CompareTag("Reward"))
+        {
+            print("get reward");
+        }
     }
 
     private void HandleGameOver()
