@@ -53,8 +53,6 @@ public class ObstacleSpawner : MonoBehaviour
             // Wait for the specified spawn interval
             else yield return new WaitForSeconds(spawnInterval / GameLevel.GameSpeedRate);
 
-            
-
             // Randomly select a position within the screen width at the bottom
             var xPosition = Random.Range(_mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x + spawnNarrowX,
                 _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - spawnNarrowX);
@@ -68,7 +66,7 @@ public class ObstacleSpawner : MonoBehaviour
                 var index = Random.Range(0, rewards.Length);
                 Instantiate(rewards[index], spawnPosition, Quaternion.identity);
             }
-            else
+            else if (!GameLevel.GamePaused)
             {
                 _spawnCounter++;
                 var index = Random.Range(0, obstacles.Length);

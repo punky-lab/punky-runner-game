@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSwipeLeft()
     {
+        if (GameLevel.GamePaused) return;
         // print("Swiped Left!");
         _direction = -1;
         _animator.SetInteger("Direction", -1);
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSwipeRight()
     {
+        if (GameLevel.GamePaused) return;
         // print("Swiped Right!");
         _direction = 1;
         _animator.SetInteger("Direction", 1);
